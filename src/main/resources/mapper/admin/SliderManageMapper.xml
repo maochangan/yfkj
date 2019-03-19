@@ -4,9 +4,27 @@
 
     <resultMap id="sliderMap" type="cn.yfkj.wxapp.entity.admin.dto.SliderManageDTO">
         <id column="id" property="id"/>
+        <result column="slider_name" property="sliderName"/>
+        <result column="slider_img_url" property="sliderImgUrl"/>
+        <result column="slider_link_url" property="sliderLinkUrl"/>
+        <result column="slider_type" property="sliderType"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="status" property="status"/>
     </resultMap>
 
+    <sql id="sliderSql">
+        id ,
+        slider_name ,
+        slider_img_url ,
+        slider_link_url ,
+        slider_type ,
+        gmt_create ,
+        gmt_modified ,
+        status
+    </sql>
 
+    <select id=""
 
     <select id="getTotalSize" resultType="Integer">
         SELECT
