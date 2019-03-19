@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yfkj.wxapp.dao.admin.SliderManagerDAO">
+
+    <resultMap id="sliderMap" type="cn.yfkj.wxapp.entity.admin.dto.SliderManageDTO">
+        <id column="id" property="id"/>
+    </resultMap>
+
+
+
+    <select id="getTotalSize" resultType="Integer">
+        SELECT
+        count(1)
+        FROM
+        wx_slider
+        WHERE
+        status != -1
+        <if test="sliderType != null">
+            AND slider_type = #{sliderType}
+        </if>
+    </select>
+
+</mapper>
