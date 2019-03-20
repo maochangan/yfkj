@@ -23,8 +23,26 @@
         gmt_modified ,
         status
     </sql>
-
-    <select id=""
+    
+    <select id="getSliderList" resultMap="sliderMap">
+        SELECT
+        <include refid="sliderSql"/>
+        FROM
+        wx_slider
+        WHERE
+        <![CDATA[status != -1]]>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        <if test="sliderType != null">
+            AND slider_type = #{sliderType}
+        </if>
+        <if test="name != null and name != ''">
+            AND slider_name LIKE CONCAT('%' , #{name,jdbcType=VARCHAR} , '%')
+        </if>
+        ORDER BY id DESC
+        LIMIT #{pageNo} , #{pageSize}
+    </select>
 
     <select id="getTotalSize" resultType="Integer">
         SELECT
@@ -32,10 +50,75 @@
         FROM
         wx_slider
         WHERE
-        status != -1
+        <![CDATA[status != -1]]>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
         <if test="sliderType != null">
             AND slider_type = #{sliderType}
         </if>
+        <if test="name != null and name != ''">
+            AND slider_name LIKE CONCAT('%' , #{name,jdbcType=VARCHAR} , '%')
+        </if>
     </select>
+
+    <select id="getSliderInfo" resultMap="sliderMap">
+        SELECT
+        <include refid="sliderSql"/>
+        FROM
+        wx_slider
+        WHERE
+        <![CDATA[status != -1]]>
+        AND
+        id = #{id}
+    </select>
+
+    <insert id="addSlider" parameterType="cn.yfkj.wxapp.entity.admin.bo.SliderManageAddBO">
+        INSERT INTO
+        wx_slider
+        (
+        slider_name ,
+        slider_img_url ,
+        slider_link_url ,
+        slider_type ,
+        status,
+        gmt_create ,
+        gmt_modified
+        )
+        VALUE
+        (
+        #{sliderName} ,
+        #{sliderImgUrl} ,
+        #{sliderLinkUrl} ,
+        #{sliderType} ,
+        #{status} ,
+        now() ,
+        now()
+        )
+    </insert>
+
+    <update id="setSliderStatus" parameterType="cn.yfkj.wxapp.entity.admin.bo.SliderManageStatusBO">
+        UPDATE
+        wx_slider
+        SET
+        status = #{status} ,
+        gmt_modified = now()
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateSliderInfo" parameterType="cn.yfkj.wxapp.entity.admin.bo.SliderManageUpdateBO">
+        UPDATE
+         wx_slider
+        SET
+        slider_name = #{sliderName}  ,
+        slider_img_url = #{sliderImgUrl}  ,
+        slider_link_url = #{sliderLinkUrl}  ,
+        slider_type = #{sliderType}  ,
+        status = #{status} ,
+        gmt_modified = now()
+        WHERE
+        id = #{id}
+    </update>
 
 </mapper>

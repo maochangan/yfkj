@@ -1,7 +1,10 @@
 package cn.yfkj.wxapp.entity.admin.dto;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public class SliderManageDTO implements Serializable {
 
     private static final long serialVersionUID = 5744879042175418583L;

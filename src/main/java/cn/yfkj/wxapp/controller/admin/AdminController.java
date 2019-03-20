@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Api(value = "管理员用户登录")
-@CrossOrigin(origins = "*", maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins = "*" , maxAge = 3600 , allowCredentials = "true")
 @RestController
 @RequestMapping(value = "admin")
 public class AdminController {
