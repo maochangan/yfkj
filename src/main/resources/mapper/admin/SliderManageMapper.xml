@@ -97,7 +97,7 @@
         )
     </insert>
 
-    <update id="setSliderStatus" parameterType="cn.yfkj.wxapp.entity.admin.bo.SliderManageStatusBO">
+    <update id="setSliderStatus" parameterType="cn.yfkj.wxapp.entity.admin.bo.ManageStatusBO">
         UPDATE
         wx_slider
         SET

@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
-public class SliderManageStatusBO implements Serializable {
+public class ManageStatusBO implements Serializable {
 
     private static final long serialVersionUID = 3536783578762204034L;
 

@@ -3,7 +3,7 @@ package cn.yfkj.wxapp.service.admin.impl;
 import cn.yfkj.wxapp.dao.admin.SliderManagerDAO;
 import cn.yfkj.wxapp.entity.admin.bo.AnyByIDBO;
 import cn.yfkj.wxapp.entity.admin.bo.SliderManageAddBO;
-import cn.yfkj.wxapp.entity.admin.bo.SliderManageStatusBO;
+import cn.yfkj.wxapp.entity.admin.bo.ManageStatusBO;
 import cn.yfkj.wxapp.entity.admin.bo.SliderManageUpdateBO;
 import cn.yfkj.wxapp.entity.admin.dto.SliderManageDTO;
 import cn.yfkj.wxapp.entity.bo.PageHelperBO;
@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 
@@ -81,12 +82,13 @@ public class SliderManagerServiceImpl implements SliderManagerService {
             }
         } catch (Exception e) {
             logger.error("添加轮播异常：" + e.getMessage());
+            TransactionAspectSupport.currentTransactionStatus().isRollbackOnly();
             return SerResult.createError();
         }
     }
 
     @Override
-    public SerResult<Boolean> setSliderStatus(SliderManageStatusBO status) {
+    public SerResult<Boolean> setSliderStatus(ManageStatusBO status) {
         try {
             int result = sliderManagerDAO.setSliderStatus(status);
             if (ZERO.equals(result)) {
@@ -96,6 +98,7 @@ public class SliderManagerServiceImpl implements SliderManagerService {
             }
         } catch (Exception e) {
             logger.error("set status err" + e.getMessage());
+            TransactionAspectSupport.currentTransactionStatus().isRollbackOnly();
             return SerResult.createError();
         }
     }
@@ -111,6 +114,7 @@ public class SliderManagerServiceImpl implements SliderManagerService {
             }
         } catch (Exception e) {
             logger.error("update slider err" + e.getMessage());
+            TransactionAspectSupport.currentTransactionStatus().isRollbackOnly();
             return SerResult.createError();
         }
     }

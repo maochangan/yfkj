@@ -2,7 +2,7 @@ package cn.yfkj.wxapp.dao.admin;
 
 import cn.yfkj.wxapp.entity.admin.bo.AnyByIDBO;
 import cn.yfkj.wxapp.entity.admin.bo.SliderManageAddBO;
-import cn.yfkj.wxapp.entity.admin.bo.SliderManageStatusBO;
+import cn.yfkj.wxapp.entity.admin.bo.ManageStatusBO;
 import cn.yfkj.wxapp.entity.admin.bo.SliderManageUpdateBO;
 import cn.yfkj.wxapp.entity.admin.dto.SliderManageDTO;
 import cn.yfkj.wxapp.entity.bo.PageHelperBO;
@@ -19,7 +19,7 @@ public interface SliderManagerDAO {
 
     public int addSlider(SliderManageAddBO slider);
 
-    public int setSliderStatus(SliderManageStatusBO status);
+    public int setSliderStatus(ManageStatusBO status);
 
     public int updateSliderInfo(SliderManageUpdateBO slider);
 }

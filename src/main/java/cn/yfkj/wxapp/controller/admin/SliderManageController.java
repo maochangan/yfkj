@@ -2,7 +2,7 @@ package cn.yfkj.wxapp.controller.admin;
 
 import cn.yfkj.wxapp.entity.admin.bo.AnyByIDBO;
 import cn.yfkj.wxapp.entity.admin.bo.SliderManageAddBO;
-import cn.yfkj.wxapp.entity.admin.bo.SliderManageStatusBO;
+import cn.yfkj.wxapp.entity.admin.bo.ManageStatusBO;
 import cn.yfkj.wxapp.entity.admin.bo.SliderManageUpdateBO;
 import cn.yfkj.wxapp.entity.admin.dto.SliderManageDTO;
 import cn.yfkj.wxapp.entity.bo.PageHelperBO;
@@ -89,7 +89,7 @@ public class SliderManageController {
 
     @ApiOperation(value = "删除 修改轮播状态")
     @PostMapping(value = "sliderStatus")
-    public ResultMap setSliderStatus(@RequestBody @Validated @ModelAttribute("status") SliderManageStatusBO status){
+    public ResultMap setSliderStatus(@RequestBody @Validated @ModelAttribute("status") ManageStatusBO status){
         try {
             SerResult<Boolean> result = sliderManagerService.setSliderStatus(status);
             if (result.isSuccess()) {
