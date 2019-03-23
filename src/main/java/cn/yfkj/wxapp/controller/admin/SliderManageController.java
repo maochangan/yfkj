@@ -93,7 +93,7 @@ public class SliderManageController {
         try {
             SerResult<Boolean> result = sliderManagerService.setSliderStatus(status);
             if (result.isSuccess()) {
-                return ResultMap.createMap("success", 0);
+                return ResultMap.createMap("success", 1);
             }else{
                 return ResultMap.createMap("fail", 0);
             }

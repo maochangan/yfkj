@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yfkj.wxapp.dao.client.UserInfoDAO">
+
+
+    <resultMap id="userInfoMap" type="cn.yfkj.wxapp.entity.client.dto.UserInfoDTO">
+        <id column="id" property="id"/>
+        <result column="open_id" property="openID"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="city" property="city"/>
+        <result column="country" property="country"/>
+        <result column="language" property="language"/>
+        <result column="gender" property="gender"/>
+        <result column="province" property="province"/>
+        <result column="status" property="status"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+
+    <sql id="userInfoSql">
+        id ,
+        open_id ,
+        nick_name,
+        avatar_url,
+        city,
+        country,
+        language,
+        gender,
+        province,
+        status,
+        gmt_create,
+        gmt_modified
+    </sql>
+
+
+    <select id="getUserInfo" resultMap="userInfoMap">
+        SELECT
+        <include refid="userInfoSql"/>
+        FROM
+        wx_user_info
+        WHERE
+        open_id = #{openID}
+    </select>
+
+    <insert id="addUserInfo" parameterType="cn.yfkj.wxapp.entity.client.bo.UserInfoUpdateOrAddBO">
+        INSERT
+        INTO
+        wx_user_info
+        (
+        open_id ,
+        nick_name,
+        avatar_url,
+        city,
+        country,
+        language,
+        gender,
+        province,
+        status,
+        gmt_create,
+        gmt_modified
+        )
+        VALUE
+        (
+        #{openID} ,
+        #{nickName},
+        #{avatarUrl} ,
+        #{city} ,
+        #{country} ,
+        #{language},
+        #{gender},
+        #{province},
+        1,
+        now(),
+        now()
+        )
+    </insert>
+
+    <update id="updateUserInfo" parameterType="cn.yfkj.wxapp.entity.client.dto.UserInfoDTO">
+        UPDATE
+        wx_user_info
+        SET
+        nick_name = #{nickName} ,
+        avatar_url = #{avatarUrl} ,
+        city = #{city} ,
+        country = #{country} ,
+        language = #{language} ,
+        gender = #{gender} ,
+        province = #{province} ,
+        gmt_modified = now()
+        WHERE
+        id = #{id}
+        AND
+        open_id = #{openID}
+    </update>
+
+
+
+
+
+
+</mapper>
