@@ -11,12 +11,13 @@
     <groupId>cn.yfkj</groupId>
     <artifactId>wxapp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>wxapp</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
@@ -77,6 +78,13 @@
             <artifactId>cos_api</artifactId>
             <version>5.4.4</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.51</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -57,7 +57,7 @@ public class MenuManageController {
         try {
             SerResult<MenuManageDTO> result = manageService.getMenuInfo(ID);
             if (result.isSuccess()) {
-                return ResultMap.createMap("success", 1).addDate(result);
+                return ResultMap.createMap("success", 1).addDate(result.getValue());
             }else{
                 return ResultMap.createMap("fail", 0);
             }

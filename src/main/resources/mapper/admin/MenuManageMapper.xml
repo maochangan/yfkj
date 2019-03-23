@@ -34,6 +34,17 @@
         </if>
     </select>
 
+    <select id="getMenuInfo" resultMap="menuMap">
+        SELECT
+        <include refid="menuSql"/>
+        FROM
+        wx_menu
+        WHERE
+        <![CDATA[status != -1]]>
+        AND
+        id = #{id}
+    </select>
+
     <select id="getMenuList" resultMap="menuMap">
         SELECT
         <include refid="menuSql"/>

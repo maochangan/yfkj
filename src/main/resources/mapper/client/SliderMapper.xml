@@ -31,4 +31,30 @@
         slider_type = #{sliderType}
     </select>
 
+    <resultMap id="menuMap" type="cn.yfkj.wxapp.entity.client.dto.MenuDTO">
+        <id column="id" property="id"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="menu_img_url" property="menuImgUrl"/>
+        <result column="menu_link_url" property="menuLinkUrl"/>
+    </resultMap>
+
+    <sql id="menuSql">
+        id ,
+        menu_name ,
+        menu_img_url ,
+        menu_link_url
+    </sql>
+
+    <select id="getMenuList" resultMap="menuMap">
+        SELECT
+        <include refid="menuSql"/>
+        FROM
+        wx_menu
+        WHERE
+        status = 1
+        ORDER BY id DESC
+    </select>
+
+
+
 </mapper>

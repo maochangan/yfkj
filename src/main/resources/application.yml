@@ -30,3 +30,8 @@ logging:
 mybatis:
   mapper-locations: classpath:mapper/*/*.xml
   type-aliases-package: cn.yfkj.entity
+
+project:
+  ##自己的
+  appID: wx7eaf9d50a6879e1d；
+  script: 60bd19f77f0c2542c031ae00af38b7d0

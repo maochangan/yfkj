@@ -1,6 +1,8 @@
 package cn.yfkj.wxapp.controller.client;
 
+import cn.yfkj.wxapp.entity.admin.bo.UserInfoBO;
 import cn.yfkj.wxapp.entity.client.bo.SliderTypeBO;
+import cn.yfkj.wxapp.entity.client.dto.MenuDTO;
 import cn.yfkj.wxapp.entity.client.dto.SliderDTO;
 import cn.yfkj.wxapp.service.client.PageService;
 import cn.yfkj.wxapp.utils.project.ResultMap;
@@ -38,6 +40,22 @@ public class PageController {
             }
         } catch (Exception e) {
             logger.error("获取轮播图片异常：" + e.getMessage());
+            return ResultMap.createMap("err", -1);
+        }
+    }
+
+    @ApiOperation(value = "获取菜单列表信息")
+    @PostMapping(value = "menu")
+    public ResultMap getMenuList(@RequestBody @Validated @ModelAttribute("user") UserInfoBO user) {
+        try {
+            SerResult<List<MenuDTO>> result = pageService.getMenuList(user);
+            if (result.isSuccess()) {
+                return ResultMap.createMap("success", 1).addDate(result.getValue());
+            }else{
+                return ResultMap.createMap("fail", 0);
+            }
+        } catch (Exception e) {
+            logger.error("获取菜单信息异常：" + e.getMessage());
             return ResultMap.createMap("err", -1);
         }
     }
