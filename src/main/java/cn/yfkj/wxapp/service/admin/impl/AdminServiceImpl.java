@@ -1,7 +1,7 @@
 package cn.yfkj.wxapp.service.admin.impl;
 
 import cn.yfkj.wxapp.dao.admin.AdminDAO;
-import cn.yfkj.wxapp.entity.bo.AdminUser;
+import cn.yfkj.wxapp.entity.admin.bo.AdminUser;
 import cn.yfkj.wxapp.service.admin.AdminService;
 import cn.yfkj.wxapp.utils.project.SerResult;
 import org.slf4j.Logger;

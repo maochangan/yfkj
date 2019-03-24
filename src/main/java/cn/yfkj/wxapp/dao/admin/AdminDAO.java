@@ -1,6 +1,6 @@
 package cn.yfkj.wxapp.dao.admin;
 
-import cn.yfkj.wxapp.entity.bo.AdminUser;
+import cn.yfkj.wxapp.entity.admin.bo.AdminUser;
 
 public interface AdminDAO {
 

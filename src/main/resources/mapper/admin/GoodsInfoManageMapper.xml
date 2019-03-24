@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yfkj.wxapp.dao.admin.GoodsManageDAO">
+
+    <select id="getTotalSize" resultType="Integer">
+        SELECT
+        count(1)
+        FROM
+        wx_good
+        WHERE
+        <![CDATA[status != -1]]>
+        <if test="status != null">
+            AND  status = #{status}
+        </if>
+        <if test="menuID != null">
+            AND menu_id = #{menuID}
+        </if>
+        <if test="name != null and name != ''">
+            AND slider_name LIKE CONCAT('%' , #{name,jdbcType=VARCHAR} , '%')
+        </if>
+    </select>
+
+    <resultMap id="goodsInfoMap" type="cn.yfkj.wxapp.entity.admin.dto.GoodsInfoManageDTO">
+        <id column="id" property="id"/>
+        <result column="menu_id" property="menuID"/>
+        <result column="good_name" property="goodName"/>
+        <result column="good_img_url" property="goodImgUrl"/>
+        <result column="good_info" property="goodInfo"/>
+        <result column="good_tips" property="goodTips"/>
+        <result column="good_prize" property="goodPrize"/>
+        <result column="good_sales" property="goodSales"/>
+        <result column="status" property="status"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtNModified"/>
+    </resultMap>
+
+    <sql id="goodsInfoSql">
+        id ,
+        menu_id,
+        good_name,
+        good_img_url,
+        good_info,
+        good_tips,
+        good_prize,
+        good_sales,
+        status,
+        gmt_create,
+        gmt_modified
+    </sql>
+
+    <select id="getGoodsInfoList" resultMap="goodsInfoMap">
+        SELECT
+        <include refid="goodsInfoSql"/>
+        FROM
+        wx_good
+        WHERE
+        <![CDATA[status != -1]]>
+        <if test="status != null">
+            AND  status = #{status}
+        </if>
+        <if test="menuID != null">
+            AND menu_id = #{menuID}
+        </if>
+        <if test="name != null and name != ''">
+            AND slider_name LIKE CONCAT('%' , #{name,jdbcType=VARCHAR} , '%')
+        </if>
+        ORDER BY id DESC
+        LIMIT #{pageNo} , #{pageSize}
+    </select>
+
+</mapper>

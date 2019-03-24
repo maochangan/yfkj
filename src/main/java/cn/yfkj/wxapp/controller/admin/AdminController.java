@@ -1,7 +1,7 @@
 package cn.yfkj.wxapp.controller.admin;
 
 
-import cn.yfkj.wxapp.entity.bo.AdminUser;
+import cn.yfkj.wxapp.entity.admin.bo.AdminUser;
 import cn.yfkj.wxapp.service.admin.AdminService;
 import cn.yfkj.wxapp.utils.project.ResultMap;
 import cn.yfkj.wxapp.utils.project.SerResult;

@@ -5,7 +5,7 @@ import cn.yfkj.wxapp.entity.admin.bo.SliderManageAddBO;
 import cn.yfkj.wxapp.entity.admin.bo.ManageStatusBO;
 import cn.yfkj.wxapp.entity.admin.bo.SliderManageUpdateBO;
 import cn.yfkj.wxapp.entity.admin.dto.SliderManageDTO;
-import cn.yfkj.wxapp.entity.bo.PageHelperBO;
+import cn.yfkj.wxapp.entity.admin.bo.PageHelperBO;
 import cn.yfkj.wxapp.service.admin.SliderManagerService;
 import cn.yfkj.wxapp.utils.project.ResultMap;
 import cn.yfkj.wxapp.utils.project.SerResult;

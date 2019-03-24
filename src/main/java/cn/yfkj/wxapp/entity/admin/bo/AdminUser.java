@@ -1,4 +1,4 @@
-package cn.yfkj.wxapp.entity.bo;
+package cn.yfkj.wxapp.entity.admin.bo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

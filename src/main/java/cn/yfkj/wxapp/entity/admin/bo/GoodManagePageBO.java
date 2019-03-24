@@ -1,12 +1,12 @@
-package cn.yfkj.wxapp.entity.bo;
+package cn.yfkj.wxapp.entity.admin.bo;
 
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
-public class PageHelperBO implements Serializable {
+public class GoodManagePageBO implements Serializable {
 
-    private static final long serialVersionUID = 8576303896328821064L;
+    private static final long serialVersionUID = -5848164556075102963L;
 
     @ApiModelProperty(value = "页数")
     private Integer pageNo;
@@ -14,18 +14,18 @@ public class PageHelperBO implements Serializable {
     @ApiModelProperty(value = "条目数")
     private Integer pageSize;
 
-    @ApiModelProperty(value = "轮播类型")
-    private Integer sliderType;
+    @ApiModelProperty(value = "所属类型")
+    private Long menuID;
 
-    public Integer getSliderType() {
-        return sliderType;
+    public Long getMenuID() {
+        return menuID;
     }
 
-    public void setSliderType(Integer sliderType) {
-        this.sliderType = sliderType;
+    public void setMenuID(Long menuID) {
+        this.menuID = menuID;
     }
 
-    @ApiModelProperty(value = "搜索关键子")
+    @ApiModelProperty(value = "搜索关键字")
     private String name;
 
     /**
