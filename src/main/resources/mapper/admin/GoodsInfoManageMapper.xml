@@ -31,7 +31,7 @@
         <result column="good_sales" property="goodSales"/>
         <result column="status" property="status"/>
         <result column="gmt_create" property="gmtCreate"/>
-        <result column="gmt_modified" property="gmtNModified"/>
+        <result column="gmt_modified" property="gmtModified"/>
     </resultMap>
 
     <sql id="goodsInfoSql">

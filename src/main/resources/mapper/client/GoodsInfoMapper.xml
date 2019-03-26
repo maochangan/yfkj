@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yfkj.wxapp.dao.client.GoodsDAO">
+
+
+    <resultMap id="goodMap" type="cn.yfkj.wxapp.entity.client.dto.GoodsInfoDTO">
+        <id column="id" property="id"/>
+        <result column="good_name" property="goodName"/>
+        <result column="good_img_url" property="goodImgUrl"/>
+        <result column="good_prize" property="goodPrize"/>
+        <result column="good_sales" property="goodSales"/>
+        <result column="menu_id" property="menuID"/>
+        <result column="good_tips" property="goodTips"/>
+        <result column="good_info" property="goodInfo"/>
+    </resultMap>
+
+    <sql id="goodSql">
+        id,
+        good_name,
+        good_img_url,
+        good_prize,
+        good_sales,
+        menu_id,
+        good_tips,
+        good_info
+    </sql>
+
+
+    <select id="getGoodsList" resultMap="goodMap">
+        SELECT
+        <include refid="goodSql"/>
+        FROM
+        wx_good
+        WHERE
+        status = 1
+        AND
+        menu_id = #{menuID}
+    </select>
+
+
+</mapper>
+
+
