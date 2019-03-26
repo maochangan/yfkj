@@ -68,4 +68,74 @@
         LIMIT #{pageNo} , #{pageSize}
     </select>
 
+    <select id="getGoodsInfo" resultMap="goodsInfoMap">
+        SELECT
+        <include refid="goodsInfoSql"/>
+        FROM
+        wx_good
+        WHERE
+        id = #{id}
+        AND
+        <![CDATA[status != -1]]>
+    </select>
+
+    <update id="setGoodsStatus" parameterType="cn.yfkj.wxapp.entity.admin.bo.ManageStatusBO">
+        UPDATE
+        wx_good
+        SET
+        status = #{status},
+        gmt_modified = now()
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateGoodsInfo" parameterType="cn.yfkj.wxapp.entity.admin.bo.ManageGoodsUpdateBO">
+        UPDATE
+        wx_good
+        SET
+        menu_id = #{menuID},
+        good_name = #{goodName},
+        good_img_url = #{goodImgUrl},
+        good_info = #{goodInfo},
+        good_tips = #{goodTips},
+        good_prize = #{goodPrize},
+        good_sales = #{goodSales},
+        status = #{status},
+        gmt_modified = now()
+        WHERE
+        id = #{id}
+    </update>
+
+    <insert id="addGoodInfo" parameterType="cn.yfkj.wxapp.entity.admin.bo.ManageGoodsAddBO">
+        INSERT
+        INTO
+        wx_good
+        (
+        menu_id,
+        good_name,
+        good_img_url,
+        good_info,
+        good_tips,
+        good_prize,
+        good_sales,
+        status,
+        gmt_create,
+        gmt_modified
+        )
+        VALUE
+        (
+        #{menuID},
+        #{goodName},
+        #{goodImgUrl},
+        #{goodInfo},
+        #{goodTips},
+        #{goodPrize},
+        #{goodSales},
+        #{status},
+        now(),
+        now()
+        )
+    </insert>
+
+
 </mapper>
