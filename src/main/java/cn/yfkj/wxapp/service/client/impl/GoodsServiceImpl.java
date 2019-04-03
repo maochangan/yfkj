@@ -29,6 +29,9 @@ public class GoodsServiceImpl implements GoodsService {
             if (result.isEmpty()) {
                 return SerResult.createFail();
             }else{
+                result.forEach(c ->{
+                    c.setNum(0);
+                });
                 return SerResult.createSuccess(result);
             }
         } catch (Exception e) {

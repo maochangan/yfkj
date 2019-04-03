@@ -35,6 +35,7 @@
         status = 1
         AND
         menu_id = #{menuID}
+        ORDER BY good_sales DESC 
     </select>
 
 

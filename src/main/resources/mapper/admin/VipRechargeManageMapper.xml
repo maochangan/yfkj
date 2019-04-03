@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yfkj.wxapp.dao.admin.VipRechargeManageDAO">
+
+    <resultMap id="vipMap" type="cn.yfkj.wxapp.entity.admin.dto.VipManageDTO">
+        <id column="id" property="id"/>
+        <result column="price" property="price"/>
+        <result column="add_price" property="addPrice"/>
+        <result column="status" property="status"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+
+    <sql id="vipSql">
+        id ,
+        price ,
+        add_price ,
+        status ,
+        gmt_create ,
+        gmt_modified
+    </sql>
+
+    <select id="getVipList" resultMap="vipMap">
+        SELECT
+        <include refid="vipSql"/>
+        FROM
+        wx_recharge
+        WHERE
+        <![CDATA[status != -1]]>
+    </select>
+
+    <select id="getVipInfo" resultMap="vipMap">
+        SELECT
+        <include refid="vipSql"/>
+        FROM
+        wx_recharge
+        WHERE
+        id = #{id}
+    </select>
+
+    <update id="setStatus" parameterType="cn.yfkj.wxapp.entity.admin.bo.ManageStatusBO">
+        UPDATE
+        wx_recharge
+        SET
+        status = #{status},
+        gmt_modified = now()
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateInfo" parameterType="cn.yfkj.wxapp.entity.admin.bo.VipManageUpdateBO">
+        UPDATE
+        wx_recharge
+        SET
+        price = #{price} ,
+        add_price = #{addPrice},
+        status = #{status} ,
+        gmt_modified = now()
+        WHERE
+        id = #{id}
+    </update>
+
+
+
+
+
+</mapper>

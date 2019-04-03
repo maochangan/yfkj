@@ -25,4 +25,6 @@ public class GoodsInfoDTO implements Serializable {
 
     private Long goodSales;
 
+    private Integer num;
+
 }

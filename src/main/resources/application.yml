@@ -1,5 +1,5 @@
 web:
-  upload-path: E://projectFile/wxappShop
+  upload-path: /usr/local/jar/log
 #  upload-path: /file/qiandaohu
 
 server:
@@ -23,7 +23,7 @@ spring:
 
 logging:
 #  path: /log/qiandaohu
-  path: E://proectLog/wxappShop
+  path: /usr/local/jar/log
   level:
     lombok.core.debug: debug
 
