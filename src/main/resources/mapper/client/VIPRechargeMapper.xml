@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yfkj.wxapp.dao.client.VipRechargeDAO">
+
+    <resultMap id="vipMap" type="cn.yfkj.wxapp.entity.client.dto.VipDTO">
+        <id column="id" property="id"/>
+        <result column="price" property="price"/>
+        <result column="add_price" property="addPrice"/>
+    </resultMap>
+
+    <sql id="vipSql">
+        id ,
+        price ,
+        add_price
+    </sql>
+
+    <select id="getVipList" resultMap="vipMap">
+        SELECT
+        <include refid="vipSql"/>
+        FROM
+        wx_recharge
+        WHERE
+        status = 1
+    </select>
+
+</mapper>

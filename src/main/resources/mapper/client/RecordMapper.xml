@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yfkj.wxapp.dao.client.RecordDAO">
+
+    <insert id="saveRecord" parameterType="cn.yfkj.wxapp.entity.client.bo.UserBuyInfo">
+        INSERT
+        INTO
+        wx_record
+        (
+        price ,
+        product_id,
+        product_num,
+        product_type,
+        gmt_create,
+        gmt_modified,
+        open_id,
+        pay_type
+        )
+        VALUES
+        <foreach collection="goodsList" item="item" index="index" separator=",">
+            (
+            #{item.goodPrize},
+            #{item.id},
+            #{item.num},
+            2,
+            now(),
+            now(),
+            #{openID},
+            2
+            )
+        </foreach>
+    </insert>
+
+</mapper>

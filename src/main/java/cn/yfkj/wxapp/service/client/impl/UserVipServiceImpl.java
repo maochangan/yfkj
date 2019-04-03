@@ -1,5 +1,6 @@
 package cn.yfkj.wxapp.service.client.impl;
 
+import cn.yfkj.wxapp.dao.client.RecordDAO;
 import cn.yfkj.wxapp.dao.client.UserVipDAO;
 import cn.yfkj.wxapp.entity.client.bo.UserBO;
 import cn.yfkj.wxapp.entity.client.bo.UserBuyInfo;
@@ -27,6 +28,9 @@ public class UserVipServiceImpl implements UserVipService {
 
     @Autowired
     private UserVipDAO userVipDAO;
+
+    @Autowired
+    private RecordDAO recordDAO;
 
 
     @Override
@@ -69,12 +73,6 @@ public class UserVipServiceImpl implements UserVipService {
     public SerResult<Map<String, Object>> userPay(UserBuyInfo info) {
         try {
             List<GoodsInfoDTO> goodList = info.getGoodsList();
-            // 商品id
-            StringBuffer sb = new StringBuffer();
-            goodList.forEach(t->{
-                sb.append(t.getId()).append(",");
-            });
-            System.out.println(sb);
             // 商品总价
             Float total = info.getTotal();
             // 用户id
@@ -84,21 +82,22 @@ public class UserVipServiceImpl implements UserVipService {
             SerResult<UserVipDTO> vipInfo = getVipInfo(userBO);
             if (vipInfo.isSuccess()) {
                 // 第一步 保存购买记录
-
-
-                // 第二部 生产兑换码
-
-                // 第三步 扣除余额
-                UserVipDTO value = vipInfo.getValue();
-                value.setVipBalance(value.getVipBalance() - total);
-                value.setVipIntegral((long) (value.getVipIntegral() + (total/10)));
-                // 更新余额数据
-                int updateBalance = userVipDAO.updateVipInfo(value);
-                if (ZERO.equals(updateBalance)) {
+                int saveRecord = recordDAO.saveRecord(info);
+                if (ZERO.equals(saveRecord)) {
                     return SerResult.createFail();
                 }else{
-                    // 返回兑换码
-                    return SerResult.createSuccess(null);
+                    // 第三步 扣除余额
+                    UserVipDTO value = vipInfo.getValue();
+                    value.setVipBalance(value.getVipBalance() - total);
+                    value.setVipIntegral((long) (value.getVipIntegral() + (total/10)));
+                    // 更新余额数据
+                    int updateBalance = userVipDAO.updateVipInfo(value);
+                    if (ZERO.equals(updateBalance)) {
+                        return SerResult.createFail();
+                    }else{
+                        // 返回兑换码
+                        return SerResult.createSuccess(null);
+                    }
                 }
             }else{
                 return SerResult.createFail();

@@ -2,6 +2,7 @@ package cn.yfkj.wxapp.controller.admin;
 
 import cn.yfkj.wxapp.entity.admin.bo.AnyByIDBO;
 import cn.yfkj.wxapp.entity.admin.bo.ManageStatusBO;
+import cn.yfkj.wxapp.entity.admin.bo.VipManageAddBO;
 import cn.yfkj.wxapp.entity.admin.bo.VipManageUpdateBO;
 import cn.yfkj.wxapp.entity.admin.dto.VipManageDTO;
 import cn.yfkj.wxapp.service.admin.VipRechargeManageService;
@@ -78,7 +79,7 @@ public class VipRechargeManageControlelr {
     }
 
     @ApiOperation(value = "修改信息")
-    @PostMapping(value = " ")
+    @PostMapping(value = "updateInfo")
     public ResultMap updateInfo(@RequestBody @Validated @ModelAttribute("info") VipManageUpdateBO info) {
         try {
             SerResult<Boolean> result = vipRechargeManageService.updateInfo(info);
@@ -89,6 +90,22 @@ public class VipRechargeManageControlelr {
             }
         } catch (Exception e) {
             logger.error("修改信息异常：" + e.getMessage());
+            return ResultMap.createMap("err", -1);
+        }
+    }
+
+    @ApiOperation(value = "添加VIP信息")
+    @PostMapping(value = "addInfo")
+    public ResultMap addVipInfo(@RequestBody @Validated @ModelAttribute("info") VipManageAddBO info) {
+        try {
+            SerResult<Boolean> result = vipRechargeManageService.addInfo(info);
+            if (result.isSuccess()) {
+                return ResultMap.createMap("success", 1);
+            }else{
+                return ResultMap.createMap("fail", 0);
+            }
+        } catch (Exception e) {
+            logger.error("添加信息异常：" + e.getMessage());
             return ResultMap.createMap("err", -1);
         }
     }

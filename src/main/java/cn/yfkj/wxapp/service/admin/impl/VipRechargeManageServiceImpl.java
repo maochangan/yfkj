@@ -3,6 +3,7 @@ package cn.yfkj.wxapp.service.admin.impl;
 import cn.yfkj.wxapp.dao.admin.VipRechargeManageDAO;
 import cn.yfkj.wxapp.entity.admin.bo.AnyByIDBO;
 import cn.yfkj.wxapp.entity.admin.bo.ManageStatusBO;
+import cn.yfkj.wxapp.entity.admin.bo.VipManageAddBO;
 import cn.yfkj.wxapp.entity.admin.bo.VipManageUpdateBO;
 import cn.yfkj.wxapp.entity.admin.dto.VipManageDTO;
 import cn.yfkj.wxapp.service.admin.VipRechargeManageService;
@@ -87,6 +88,22 @@ public class VipRechargeManageServiceImpl implements VipRechargeManageService {
             logger.error("修改异常：" + e.getMessage());
             TransactionAspectSupport.currentTransactionStatus().isRollbackOnly();
             return SerResult.createFail();
+        }
+    }
+
+    @Override
+    public SerResult<Boolean> addInfo(VipManageAddBO info) {
+        try {
+            int result = vipRechargeManageDAO.addInfo(info);
+            if (ZERO.equals(result)) {
+                return SerResult.createFail();
+            }else{
+                return SerResult.createSuccess(true);
+            }
+        } catch (Exception e) {
+            logger.error("添加信息异常：" + e.getMessage());
+            TransactionAspectSupport.currentTransactionStatus().isRollbackOnly();
+            return SerResult.createError();
         }
     }
 }

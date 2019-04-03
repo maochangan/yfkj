@@ -60,6 +60,27 @@
         id = #{id}
     </update>
 
+    <insert id="addInfo" parameterType="cn.yfkj.wxapp.entity.admin.bo.VipManageAddBO">
+        INSERT
+        INTO
+        wx_recharge
+        (
+        price,
+        add_price,
+        status,
+        gmt_create,
+        gmt_modified
+        )
+        VALUES
+        (
+        #{price},
+        #{addPrice},
+        #{status},
+        now(),
+        now()
+        )
+    </insert>
+
 
 
 
